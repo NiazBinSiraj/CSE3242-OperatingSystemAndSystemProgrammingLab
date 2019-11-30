@@ -33,19 +33,19 @@ void inputProcess()
 
 void calculateWT()
 {
-    int remProcess = n;
+    int remProcess = n; //remaining process
     int i = 0;
     int qp;
     while(remProcess != 0)
     {
-        qp = q;
+        qp = q; //remaining quantum
         if(p[i].ext == p[i].bt)
         {
             i = ((i+1)%n);
             continue;
         }
 
-        if(p[i].ext+q > p[i].bt) qp = p[i].bt-p[i].ext;
+        if(p[i].ext+q > p[i].bt) qp = p[i].bt-p[i].ext; //calculating remaining quantum
 
         p[i].ext+=q;
         if(p[i].ext >= p[i].bt) {remProcess--;p[i].ext = p[i].bt;}
