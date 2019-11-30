@@ -1,20 +1,17 @@
-//First Come First Serve
+///Shortest Job First (Non Preemptive)
+
 #include <bits/stdc++.h>
 using namespace std;
 
-class process{
-public:
+struct process{
     int id;
     int bt;
     int wt;
     int tat;
-
-    process(){};
-    process(int _id, int _bt){id=_id; bt=_bt;}
 };
-bool operator < (process& p1, process& p2)
+bool operator < (process p1, process p2)
 {
-    return p1.id<p2.id;
+    return p1.bt<p2.bt;
 }
 
 int n; // total number of process
@@ -50,8 +47,7 @@ void calculateTAT()
     return;
 }
 
-
-void fcfs()
+void SJFNP()
 {
     int totalWT = 0;
     int totalTAT = 0;
@@ -76,7 +72,6 @@ void fcfs()
     return;
 }
 
-
 int main()
 {
     cout<<"Enter total number of processes : ";
@@ -84,7 +79,6 @@ int main()
 
     inputProcess();
     sort(p, p+n);
-    fcfs();
 
-    return 0;
+    SJFNP();
 }
