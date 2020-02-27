@@ -1,6 +1,7 @@
 ///First Come First Serve
 
 #include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 struct process{

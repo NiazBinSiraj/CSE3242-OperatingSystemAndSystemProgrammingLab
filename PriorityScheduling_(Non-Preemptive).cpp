@@ -48,7 +48,7 @@ void calculateTAT()
     return;
 }
 
-void SJFNP()
+void PSNP()
 {
     int totalWT = 0;
     int totalTAT = 0;
@@ -81,6 +81,6 @@ int main()
     inputProcess();
     sort(p, p+n);
 
-    SJFNP();
+    PSNP();
 }
 

@@ -35,7 +35,7 @@ void calculateWT()
 {
     int remProcess = n; //remaining process
     int i = 0;
-    int qp;
+    int qp; //remaining quantum
     while(remProcess != 0)
     {
         qp = q; //remaining quantum
@@ -53,6 +53,7 @@ void calculateWT()
         for(int j=0; j<n; j++)
         {
             if(j == i || p[j].ext == p[j].bt) continue;
+
             p[j].wt+=qp;
         }
         i = ((i+1)%n);
