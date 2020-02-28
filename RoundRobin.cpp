@@ -47,8 +47,8 @@ void calculateWT()
 
         if(p[i].ext+q > p[i].bt) qp = p[i].bt-p[i].ext; //calculating remaining quantum
 
-        p[i].ext+=q;
-        if(p[i].ext >= p[i].bt) {remProcess--;p[i].ext = p[i].bt;}
+        p[i].ext+=qp;
+        if(p[i].ext == p[i].bt) remProcess--;
 
         for(int j=0; j<n; j++)
         {
