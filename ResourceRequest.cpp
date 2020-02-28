@@ -145,7 +145,6 @@ int main()
     }
 
     calculateNeed();
-
     if(safety() == true)
     {
         int cmd;
@@ -156,6 +155,7 @@ int main()
             cin>>cmd;
             if(cmd == 1)
             {
+                calculateNeed();
                 int pid;
                 cout<<"Enter process id : ";
                 cin>>pid;

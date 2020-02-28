@@ -7,19 +7,18 @@ using namespace std;
 int p; //number of processes
 int r; //number of resources
 int allocation[100][100];
-int mx[100][100];
+int request[100][100];
 int available[100];
 
 bool finish[100];
 int work[100];
-int need[100][100];
 vector <int> safeSequence;
 
 bool isValid(int pi)
 {
     for(int i=0; i<r; i++)
     {
-        if(need[pi][i]>work[i]) return false;
+        if(request[pi][i]>work[i]) return false;
     }
     return true;
 }
@@ -27,17 +26,22 @@ bool isValid(int pi)
 bool safety()
 {
     //initialization
-    for(int i=0; i<p; i++) finish[i] = false;
-    for(int i=0; i<r; i++) work[i] = available[i];
-
-    //calculateNeed
     for(int i=0; i<p; i++)
     {
+        bool finished = true;
         for(int j=0; j<r; j++)
         {
-            need[i][j] = mx[i][j] - allocation[i][j];
+            if(allocation[i][j] != 0)
+            {
+                finished = false;
+                break;
+            }
         }
+
+        if(finished == true) finish[i] = true;
+        else finish[i] = false;
     }
+    for(int i=0; i<r; i++) work[i] = available[i];
 
     //Safety Check
     int pi = 0;
@@ -60,6 +64,7 @@ bool safety()
 
 void printSafeSequence()
 {
+    cout<<"There is no deadlock situation in the system.\n";
     cout<<"\nThe Safe Sequence is : ";
     for(int i=0; i<p; i++)
     {
@@ -69,9 +74,21 @@ void printSafeSequence()
     return;
 }
 
+void printDeadlockedProcess()
+{
+    cout<<"The system is in a deadlocked state.\n";
+    cout<<"The deadlocked processes are : ";
+    for(int i=0; i<p; i++)
+    {
+        if(finish[i] == false) cout<<"p"<<i<<" ";
+    }
+    cout<<endl;
+    return;
+}
+
 int main()
 {
-    Fin;
+    //Fin;
     cout<<"Enter total number of processes : ";
     cin>>p;
 
@@ -86,12 +103,12 @@ int main()
             cin>>allocation[i][j];
         }
     }
-    cout<<"Enter maximum needs of processes: \n";
+    cout<<"Enter requested resources of processes: \n";
     for(int i=0; i<p; i++)
     {
         for(int j=0; j<r; j++)
         {
-            cin>>mx[i][j];
+            cin>>request[i][j];
         }
     }
     cout<<"Enter available resources: \n";
@@ -101,7 +118,7 @@ int main()
     }
 
     if(safety() == true) printSafeSequence();
-    else cout<<"There is an Unsafe State in The System."<<endl;
+    else printDeadlockedProcess();
 
     return 0;
 }
